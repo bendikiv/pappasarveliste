@@ -1,6 +1,16 @@
 import '../styles/global.css';
 import { AppProps } from 'next/app';
+import { Flex, ChakraProvider } from '@chakra-ui/react';
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+export const userName = 'Bendik';
+
+function App({ Component, pageProps }: AppProps) {
+  return (
+    <ChakraProvider>
+      <Flex justifyContent="center">
+        <Component {...pageProps} />
+      </Flex>
+    </ChakraProvider>
+  );
 }
+export default App;

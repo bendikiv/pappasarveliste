@@ -1,49 +1,88 @@
 import Head from 'next/head';
-import Layout, { siteTitle } from '../components/layout';
-import utilStyles from '../styles/utils.module.sass';
 import { getSortedPostsData } from '../lib/posts';
-import Link from 'next/link';
-import Date from '../components/date';
 import { GetStaticProps } from 'next';
+import PageLayout from '../components/pageLayout';
+import { Hendelse, HendelseComponent } from '../components/Hendelse';
 
-export default function Home({
-  allPostsData
-}: {
-  allPostsData: {
-    date: string
-    title: string
-    id: string
-  }[]
-}) {
+interface HomeProps {
+  userName: string;
+}
+
+const hendelser: Hendelse[] = [
+  {
+    navn: 'Bendik',
+    beskrivelse: 'Ligner i utseende',
+    poeng: 1,
+    dato: '1. januar 2021',
+  },
+  {
+    navn: 'Herman',
+    beskrivelse: 'Tok med på tur',
+    poeng: 2,
+    dato: '1. januar 2021',
+  },
+  {
+    navn: 'Thea',
+    beskrivelse: 'Flink på jobb',
+    poeng: 1,
+    dato: '1. januar 2021',
+  },
+  {
+    navn: 'Katrine',
+    beskrivelse: 'Er amazing',
+    poeng: 99,
+    dato: 'Hele tiden',
+  },
+  {
+    navn: 'Johanne',
+    beskrivelse: 'Yndlingsbarn',
+    poeng: 10,
+    dato: '1. januar 2021',
+  },
+  {
+    navn: 'Bendik',
+    beskrivelse: 'Gjorde noe dumt',
+    poeng: -1,
+    dato: '1. januar 2021',
+  },
+  {
+    navn: 'Thea',
+    beskrivelse: 'Flink på jobb',
+    poeng: 1,
+    dato: '1. januar 2021',
+  },
+  {
+    navn: 'Katrine',
+    beskrivelse: 'Er amazing',
+    poeng: 99,
+    dato: 'Hele tiden',
+  },
+  {
+    navn: 'Johanne',
+    beskrivelse: 'Yndlingsbarn',
+    poeng: 10,
+    dato: '1. januar 2021',
+  },
+  {
+    navn: 'Bendik',
+    beskrivelse: 'Gjorde noe dumt',
+    poeng: -1,
+    dato: '1. januar 2021',
+  },
+];
+
+export default function Home({ userName }: HomeProps) {
   return (
-    <Layout home>
+    <>
       <Head>
-        <title>{siteTitle}</title>
+        <title>Pappas Arveliste</title>
       </Head>
-      <section className={utilStyles.headingMd}>
-        <p>[Your Self Introduction]</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this in{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
-      </section>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>
-                <a>{title}</a>
-              </Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </Layout>
+      <PageLayout loggedIn={true}>
+        {hendelser.map((h: Hendelse) => (
+          <HendelseComponent key={h.beskrivelse} hendelse={h} />
+        ))}
+      </PageLayout>
+    </>
   );
 }
 
@@ -51,7 +90,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
-      allPostsData
-    }
+      allPostsData,
+    },
   };
 };
