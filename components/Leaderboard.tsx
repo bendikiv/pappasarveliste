@@ -1,7 +1,9 @@
-import { Box, Flex } from '@chakra-ui/layout';
+import { Box } from '@chakra-ui/layout';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { useUsers } from '../hooks/useUsers';
 
 export default function Leaderboard() {
+  const { users } = useUsers();
   return (
     <Box width="100%">
       <Table>
@@ -12,26 +14,14 @@ export default function Leaderboard() {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>Bendik</Td>
-            <Td>10</Td>
-          </Tr>
-          <Tr>
-            <Td>Thea</Td>
-            <Td>12</Td>
-          </Tr>
-          <Tr>
-            <Td>Herman</Td>
-            <Td>5</Td>
-          </Tr>
-          <Tr>
-            <Td>Katrine</Td>
-            <Td>99</Td>
-          </Tr>
-          <Tr>
-            <Td>Johanne</Td>
-            <Td>23</Td>
-          </Tr>
+          {users.map((u, i) => {
+            return (
+              <Tr key={i}>
+                <Td>{u.userName}</Td>
+                <Td>{u.points}</Td>
+              </Tr>
+            );
+          })}
         </Tbody>
       </Table>
     </Box>

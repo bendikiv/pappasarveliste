@@ -14,7 +14,7 @@ export default function Menu({ loggedIn }: MenuProps) {
             {loggedIn && (
               <>
                 <MenuItem name="Forside" to="/" />
-                <MenuItem name="Leaderboard" to="leaderboard" />
+                <MenuItem name="Leaderboard" to="/leaderboard" />
                 <MenuItem name="Logg ut" to="/logginn" />
               </>
             )}
