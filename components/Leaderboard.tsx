@@ -4,12 +4,13 @@ import { useUsers } from '../hooks/useUsers';
 
 export default function Leaderboard() {
   const { users } = useUsers();
+
   return (
     <Box width="100%">
       <Table>
         <Thead>
           <Tr>
-            <Th>Navn</Th>
+            <Th>Navns</Th>
             <Th>Poeng</Th>
           </Tr>
         </Thead>
